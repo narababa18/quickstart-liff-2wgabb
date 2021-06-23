@@ -25,7 +25,6 @@ const code = document.getElementById('code');
 const friendShip = document.getElementById('friendShip');
 
 async function main() {
-
   // Initialize LIFF app)
   await liff.init({ liffId: '1656132939-XANgZ7Pr' });
   // Try a LIFF function
@@ -41,21 +40,18 @@ async function main() {
   if (!liff.isInClient()) {
     btnLogIn.style.display = 'block';
     btnLogOut.style.display = 'block';
-    btnShare.style.display = 'block';
   }
   if (!liff.isInClient()) {
     if (liff.isLoggedIn()) {
-      btnLogIn.style.display = "none"
-      btnLogOut.style.display = "block"
-      btnShare.style.display = 'block';
-      getUserProfile()
+      btnLogIn.style.display = 'none';
+      btnLogOut.style.display = 'block';
+      getUserProfile();
     } else {
-      btnLogIn.style.display = "block"
-      btnLogOut.style.display = "none"
-      btnShare.style.display = 'none';
+      btnLogIn.style.display = 'block';
+      btnLogOut.style.display = 'none';
     }
   } else {
-    getUserProfile()
+    getUserProfile();
   }
 }
 main();
@@ -69,25 +65,28 @@ async function getUserProfile() {
   email.innerHTML = '<b>email:</b> ' + liff.getDecodedIDToken().email;
 }
 btnLogIn.onclick = () => {
-  liff.login()
-}
+  liff.login();
+};
 
 btnLogOut.onclick = () => {
-  liff.logout()
-  window.location.reload()
-}
+  liff.logout();
+  window.location.reload();
+};
 
 async function sendMsg() {
-  if (liff.getContext().type !== "none" && liff.getContext().type !== "external") {
+  if (
+    liff.getContext().type !== 'none' &&
+    liff.getContext().type !== 'external'
+  ) {
     await liff.sendMessages([
       {
-        "type": "text",
-        "text": "This message was sent by sendMessages()"
+        type: 'text',
+        text: 'This message was sent by sendMessages()'
       }
-    ])
-    alert("Message sent")
+    ]);
+    alert('Message sent');
   }
 }
 btnSend.onclick = () => {
-  sendMsg()
-}
+  sendMsg();
+};
